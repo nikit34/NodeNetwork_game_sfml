@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Menu.h"
+#include "Server.h"
+#include "Client.h"
 
 
 class MainMenu : public Menu {

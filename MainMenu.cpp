@@ -67,11 +67,13 @@ void MainMenu::calculateTextYaxis(float&& y) {
 }
 
 void MainMenu::server() {
-
+    Server s(this->window);
+    s.launch();
 }
 
 void MainMenu::client() {
-
+    Client c(this->window);
+    c.launch();
 }
 
 void MainMenu::mode() {
