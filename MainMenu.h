@@ -14,8 +14,8 @@ public:
 
 protected:
 	virtual void draw();
-	void centerTextXaxis(sf::Text& txt, float y);
-	void calculateTextYaxis();
+	void centerTextXaxis(sf::Text& txt, float&& y);
+	void calculateTextYaxis(float&& y);
 
 	bool fullscreen;
 	sf::Text title;

@@ -27,5 +27,6 @@ protected:
 	std::vector<Button> option;
 	sf::Vector2f click;
 
+private:
 	bool end;
 };

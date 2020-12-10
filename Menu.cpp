@@ -26,7 +26,7 @@ void Menu::run() {
                     this->end = true;
                 }
             }
-
+            // pressed
             if (this->event.type == sf::Event::MouseButtonPressed) {
                 if (this->event.mouseButton.button == sf::Mouse::Left) {
                     this->click = this->window.mapPixelToCoords(
@@ -34,6 +34,7 @@ void Menu::run() {
                     );
                 }
             }
+            // ent event - call action
             else if (this->event.type == sf::Event::MouseButtonReleased) {
                 for (uint16_t i = 0; i < this->option.size(); ++i) {
                     if (this->option[i].txt.getGlobalBounds().contains(
@@ -55,6 +56,7 @@ void Menu::run() {
         this->action();
         this->window.clear();
 
+        // for cosmetics
         for (uint16_t i = 0; i < this->option.size(); ++i) {
             if (this->option[i].txt.getGlobalBounds().contains(
                     this->window.mapPixelToCoords(
