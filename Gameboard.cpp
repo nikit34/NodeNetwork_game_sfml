@@ -18,7 +18,7 @@ void Gameboard::init() {
 
 
 void Gameboard::reset() {
-    //this->cells.clear();
+    this->cells.clear();
 }
 
 

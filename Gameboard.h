@@ -4,6 +4,7 @@
 #include <SFML/Network.hpp>
 
 #include "Player.h"
+#include "Cell.h"
 
 
 
@@ -22,5 +23,5 @@ public:
 
 protected:
 	std::vector<Player>* players;
-	//std::vector<Cell> cells;
+	std::vector<Cell> cells;
 };

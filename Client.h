@@ -22,6 +22,7 @@ public:
 protected:
     sf::RenderWindow& window;
     Gameboard gboard;
+    std::vector<Player> players;
 
     bool start;
     bool connected;
