@@ -6,6 +6,7 @@
 class Menu;
 struct Button {
 	sf::Text txt;
+	void (Menu::* f)(); // point to abstract button
 };
 
 class Menu {
@@ -19,6 +20,7 @@ public:
 protected:
 	virtual void action();
 	virtual void draw();
+	void centerTextXaxis(sf::Text& txt, float y);
 
 	sf::RenderWindow& window;
 	sf::Event event;

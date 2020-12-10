@@ -8,10 +8,18 @@ public:
 	MainMenu(sf::RenderWindow& windows);
 	virtual ~MainMenu();
 	
+	void server();
+	void client();
+	void mode();
 
 protected:
 	virtual void draw();
+	void centerTextXaxis(sf::Text& txt, float y);
+	void calculateTextYaxis();
 
 	bool fullscreen;
 	sf::Text title;
+	sf::Text maintext;
+	sf::Font font;
+	sf::Image icon;
 };

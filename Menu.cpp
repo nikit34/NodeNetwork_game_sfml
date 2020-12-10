@@ -5,6 +5,13 @@ Menu::Menu(sf::RenderWindow& win): window(win), end(false) { }
 
 Menu::~Menu() { }
 
+void Menu::centerTextXaxis(sf::Text& txt, float y) {
+    txt.setPosition(
+        (this->window.getSize().x - txt.getGlobalBounds().width) / 2.f, 
+        y
+    );
+}
+
 
 void Menu::run() {
     while (this->window.isOpen() && !this->end) {
