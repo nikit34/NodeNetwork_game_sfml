@@ -1,7 +1,7 @@
 #include "Menu.h"
 
 
-Menu::Menu(sf::RenderWindow& win) : win(win), end(false) { }
+Menu::Menu(sf::RenderWindow& win) : window(win), end(false) { }
 
 Menu::~Menu() { }
 

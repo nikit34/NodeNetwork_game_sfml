@@ -5,13 +5,13 @@
 
 class MainMenu : public Menu {
 public:
-	MainMenu(sf::RenderWindow& win);
-	virtual void run();
+	MainMenu(sf::RenderWindow& windows);
 	virtual ~MainMenu();
 	
-	void exit();
 
 protected:
 	virtual void draw();
+
 	bool fullscreen;
+	sf::Text title;
 };

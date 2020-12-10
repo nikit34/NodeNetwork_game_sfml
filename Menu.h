@@ -6,7 +6,7 @@
 
 class Menu {
 public:
-	Menu(sf::RenderWindow& win);
+	Menu(sf::RenderWindow& window);
 	virtual ~Menu();
 	
 	virtual void run(); 
@@ -16,7 +16,7 @@ protected:
 	virtual void action();
 	virtual void draw();
 
-	sf::RenderWindow& win;
+	sf::RenderWindow& window;
 
 	bool end;
 };
