@@ -2,6 +2,9 @@
 
 #include <SFML/Network.hpp>
 
+#include "Game.h"
+#include "Client.h"
+
 
 
 class Server : public Client {

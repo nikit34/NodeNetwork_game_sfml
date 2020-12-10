@@ -5,6 +5,7 @@
 #include "Client.h"
 
 
+
 class MainMenu : public Menu {
 public:
 	MainMenu(sf::RenderWindow& windows);

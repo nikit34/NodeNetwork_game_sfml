@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 
 
+
 class Menu;
 struct Button {
 	sf::Text txt;

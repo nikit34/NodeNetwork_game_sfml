@@ -1,6 +1,12 @@
 #pragma once
+#include <iostream>
+#include <vector>
 
 #include <SFML/Network.hpp>
+
+#include "Game.h"
+#include "Server.h"
+
 
 
 class Client {
