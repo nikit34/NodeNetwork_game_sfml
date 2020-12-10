@@ -25,6 +25,7 @@ protected:
 	sf::RenderWindow& window;
 	sf::Event event;
 	std::vector<Button> option;
+	sf::Vector2f click;
 
 	bool end;
 };

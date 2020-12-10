@@ -22,4 +22,7 @@ protected:
 	sf::Text maintext;
 	sf::Font font;
 	sf::Image icon;
+
+private:
+	sf::ContextSettings settings;
 };
