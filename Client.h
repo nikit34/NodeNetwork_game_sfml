@@ -21,4 +21,9 @@ public:
 
 protected:
     sf::RenderWindow& window;
+    Gameboard gboard;
+
+    bool start;
+    bool connected;
+    bool exitCurrentGame;
 };

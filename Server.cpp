@@ -12,5 +12,9 @@ Server::~Server() { }
 
 
 void Server::launch() {
+	this->start = false;
+	this->connected = false;
+	this->exitCurrentGame = false;
 
+	gboard.init();
 }
