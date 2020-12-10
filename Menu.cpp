@@ -1,21 +1,29 @@
 #include "Menu.h"
 
 
-Menu::Menu(sf::RenderWindow& win) : window(win), end(false) { }
+Menu::Menu(sf::RenderWindow& win): window(win), end(false) { }
 
 Menu::~Menu() { }
 
 
 void Menu::run() {
-    while (window.isOpen() && !end) {
+    while (this->window.isOpen() && !this->end) {
         // poll any event to top in stack for follow proccessing
-        while (window.pollEvent(event)) {
-
+        while (this->window.pollEvent(this->event)) {
+            // user wants to close the window
+            if (this->event.type == sf::Event::Closed)
+                this->window.close();
+            
+            if (this->event.type == sf::Event::KeyPressed) {
+                if (this->event.key.code == sf::Keyboard::Escape) {
+                    this->end = true;
+                }
+            }
         }
-        action();
-        window.clear();
-        draw();
-        window.display();
+        this->action();
+        this->window.clear();
+        this->draw();
+        this->window.display();
     }
 }
 

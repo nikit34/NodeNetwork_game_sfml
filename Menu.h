@@ -3,6 +3,10 @@
 #include <SFML/Graphics.hpp>
 
 
+class Menu;
+struct Button {
+	sf::Text txt;
+};
 
 class Menu {
 public:
@@ -18,6 +22,7 @@ protected:
 
 	sf::RenderWindow& window;
 	sf::Event event;
+	std::vector<Button> option;
 
 	bool end;
 };
