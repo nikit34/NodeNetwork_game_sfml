@@ -2,7 +2,7 @@
 #include <ctime>
 #include <cstdlib>
 
-#include <SFML/Graphics.hpp>
+#include <MainMenu.h>
 
 
 
