@@ -17,6 +17,7 @@ protected:
 	virtual void draw();
 
 	sf::RenderWindow& window;
+	sf::Event event;
 
 	bool end;
 };
