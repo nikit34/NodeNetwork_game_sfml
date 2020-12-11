@@ -292,14 +292,51 @@ void Server::waitClient() {
 	}
 }
 
-void Server::manageNetwork()
-{
+void Server::manageNetwork() {
+	if (!this->connected)
+		return;
+
+	uint64_t i = 0;
+	for (std::vector<sf::TcpSocket*>::iterator it = this->sockets.begin(); it != this->sockets.end(); ++it) {
+		sf::TcpSocket& client = **it;
+		if (this->selector.isReady(client)) {
+			sf::Packet packet;
+			if (client.receive(packet) == sf::Socket::Disconnected) {
+				std::cout << "Disconnected client # " << (i + 2) << " ! " << std::endl;
+				it = this->sockets.erase(it);
+				break;
+			}
+			else {
+				sf::Uint8 code;
+				if (packet >> code) {
+					this->networkActions(packet, code);
+					for (uint64_t j = 0; j < this->sockets.size(); ++j) 
+						if (j != i) 
+							this->sockets[j]->send(packet);
+				}
+			}
+		}
+		++i;
+	}
+
+	// resynchronize clients with server each TIME_RESYNC sec
+	if (this->timeElapsed.getElapsedTime().asMilliseconds() > this->TIME_RESYNC) {
+		this->resyncClients();
+		this->timeElapsed.restart();
+	}
 }
 
 void Server::addPlayer()
 {
 }
 
-void Server::resyncClients()
-{
+void Server::resyncClients() {
+	sf::Packet packet;
+	packet << (sf::Uint8)Client::SYNCHRONIZE_GBOARD << this->gboard;
+	for (std::vector<sf::TcpSocket*>::iterator it = this->sockets.begin();
+		it != this->sockets.end();
+		++it) {
+		sf::TcpSocket& client = **it;
+		client.send(packet);
+	}
 }

@@ -30,5 +30,5 @@ protected:
     sf::SocketSelector selector;
     std::vector<sf::TcpSocket*> sockets;
     sf::Clock timeElapsed; 
-    static const sf::Int32 T_RESYNC = 1000; 
+    static const sf::Int32 TIME_RESYNC = 1000; 
 };
