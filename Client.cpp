@@ -213,8 +213,52 @@ void Client::waitServer() {
     }
 }
 
-void Client::menuWaitingRoom()
-{
+void Client::menuWaitingRoom() {
+    sf::Font font;
+    font.loadFromFile("Textures/JetBreins.ttf");
+
+    sf::Text info;
+    info.setFont(font);
+    info.setCharacterSize(24);
+    info.setPosition(10.f, 10.f);
+
+    sf::Text info2;
+    info2.setFont(font);
+    info2.setCharacterSize(18);
+    info2.setPosition(10.f, 10.f);
+    info2.move(0, 40.f);
+
+    sf::Text info3 = info;
+    info3.setPosition(300.f, 200.f);
+    info3.setString("Player color :");
+
+    sf::RectangleShape colorRect(sf::Vector2f(50.f, 20.f));
+    colorRect.setPosition(300.f + info3.getGlobalBounds().width, 200.f);
+    colorRect.setFillColor(Player::DEFAULT_COLOR[this->idPlayer]);
+
+    info.setString("waiting ...");
+    sf::Event event;
+    while (!this->start && !this->exitCurrentGame && this->window.isOpen()) {
+        while (this->window.pollEvent(event)) {
+            if (event.type == sf::Event::Closed) {
+                this->exitCurrentGame = true;
+                this->window.close();
+            }
+            if (event.type == sf::Event::KeyPressed) 
+                if (event.key.code == sf::Keyboard::Escape) 
+                    this->exitCurrentGame = true;
+        }
+
+        info2.setString("Connectes: " + std::to_string((int)this->playerConnected) + " /" + std::to_string((int)this->playerMax));
+
+        this->window.clear();
+        this->window.draw(info);
+        this->window.draw(info2);
+        this->window.draw(info3);
+        this->window.draw(colorRect);
+
+        this->window.display();
+    }
 }
 
 void Client::menuServerList() {
