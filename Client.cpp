@@ -60,11 +60,67 @@ void Client::launch() {
 }
 
 void Client::run() {
+    sf::Clock clock;
+    this->socket.setBlocking(false);
+    float dt;
+    sf::Event event;
+    while (this->window.isOpen() && !this->exitCurrentGame && this->connected) {
+        dt = clock.restart().asSeconds();
+ 
+        while (this->window.pollEvent(event))
+            manageEvents(event);
+        
+        manageNetwork();
 
+        this->gboard.update(dt);
+        this->window.clear();
+        this->window.draw(this->gboard);
+        this->window.display();
+    }
+    this->socket.disconnect();
 }
 
 void Client::manageEvents(sf::Event event) {
+    if (event.type == sf::Event::Closed)
+        this->window.close();
 
+    if (event.type == sf::Event::KeyPressed)
+        if (event.key.code == sf::Keyboard::Escape) 
+            this->exitCurrentGame = true;
+        
+    
+    if (event.type == sf::Event::MouseButtonPressed) {
+        if (event.mouseButton.button == sf::Mouse::Left) 
+            this->posClickedMouse = this->window.mapPixelToCoords(sf::Mouse::getPosition(this->window));
+        
+        else if (event.mouseButton.button == sf::Mouse::Right) 
+            this->posClickedMouse = this->window.mapPixelToCoords(sf::Mouse::getPosition(this->window));
+        
+    }
+
+    if (event.type == sf::Event::MouseButtonReleased) {
+        if (event.mouseButton.button == sf::Mouse::Left) {
+            this->actionLink(this->posClickedMouse.x, this->posClickedMouse.y,
+                this->window.mapPixelToCoords(sf::Mouse::getPosition(this->window)).x,
+                this->window.mapPixelToCoords(sf::Mouse::getPosition(this->window)).y
+            );
+        }
+        else if (event.mouseButton.button == sf::Mouse::Right) {
+            if (this->gboard.getCloserCell(
+                this->posClickedMouse.x, this->posClickedMouse.y
+            ) == this->gboard.getCloserCell(
+                this->window.mapPixelToCoords(sf::Mouse::getPosition(this->window))
+                )
+            ) {
+                this->actionFree(this->idPlayer, this->posClickedMouse.x, this->posClickedMouse.y);
+            }
+            else {
+                this->actionChangeLink(this->posClickedMouse.x, this->posClickedMouse.y,
+                    this->window.mapPixelToCoords(sf::Mouse::getPosition(this->window)).x,
+                    this->window.mapPixelToCoords(sf::Mouse::getPosition(this->window)).y);
+            }
+        }
+    }
 }
 
 void Client::actionLink(int orgX, int orgY, int destX, int destY) {
@@ -93,8 +149,17 @@ void Client::actionChangeLink(int orgX, int orgY, int destX, int destY)
 {
 }
 
-void Client::manageNetwork()
-{
+void Client::manageNetwork() {
+    if (!this->connected)
+        return;
+    sf::Packet packet;
+    if (this->socket.receive(packet) == sf::Socket::Disconnected) {
+        std::cout << "[ERROR] connected" << std::endl;
+        this->connected = false;
+    }
+    sf::Uint8 code;
+    if (packet >> code) 
+        networkActions(packet, code);
 }
 
 void Client::networkActions(sf::Packet& p, sf::Uint8 code)
