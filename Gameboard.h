@@ -21,8 +21,12 @@ public:
 	void randomize();
 	void initPlayers();
 	void update(float dt);
+	void link(int idOrg, int idDest, float strength=0.5f);
+	void changeLinkState(int idOrg, int idDest);
 	int getCloserCell(float x, float y);
 	int getCloserCell(sf::Vector2f coord);
+	int getOwner(int idCell);
+	void free(int idPlayer, int idCell);
 
 protected:
 	std::vector<Player>* players;

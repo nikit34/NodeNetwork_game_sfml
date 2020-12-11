@@ -85,8 +85,7 @@ void Game::proceed(int orgX, int orgY, int destX, int destY) {
     }
 }
 
-void Game::changeLinkState(int orgX, int orgY, int destX, int destY)
-{
+void Game::changeLinkState(int orgX, int orgY, int destX, int destY) {
     int idOrg = this->gboard.getCloserCell(orgX, orgY);
     if (idOrg >= 0 && this->gboard.getOwner(idOrg) == this->idPlayer) {
         int idDest = this->gboard.getCloserCell(destX, destY);
@@ -94,8 +93,4 @@ void Game::changeLinkState(int orgX, int orgY, int destX, int destY)
             this->gboard.changeLinkState(idOrg, idDest);
         }
     }
-}
-
-int Gameboard::getOwner(int idCell) {
-    return this->cells.at(idCell).idOwner;
 }

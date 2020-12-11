@@ -44,17 +44,46 @@ void Gameboard::initPlayers() {
     }
 }
 
+void Gameboard::draw(sf::RenderTarget& target, sf::RenderStates states) const {
+
+}
+
+void Gameboard::link(int idOrg, int idDest, float strength) {
+    
+}
+
 void Gameboard::update(float dt) {
     for (std::vector<Cell>::iterator it = cells.begin(); it != cells.end(); ++it) {
         it->update(dt);
     }
 }
 
+int Gameboard::getCloserCell(float x, float y) {
+    int id = 0;
+    float dx, dy, sr;
+    for (std::vector<Cell>::iterator it = cells.begin(); it != cells.end(); it++) {
+        dx = it->pos.x - x;
+        dy = it->pos.y - y;
+        sr = it->radius;
+        if (dx * dx + dy * dy < sr * sr)
+            return id;
+        ++id;
+    }
+    return -1;
+}
+
 int Gameboard::getCloserCell(sf::Vector2f coord) {
     return getCloserCell(coord.x, coord.y);
 }
 
-void Gameboard::draw(sf::RenderTarget& target, sf::RenderStates states) const {
+void Gameboard::free(int idPlayer, int idCell) {
 
 }
 
+void Gameboard::changeLinkState(int idOrg, int idDest) {
+
+}
+
+int Gameboard::getOwner(int idCell) {
+    return this->cells.at(idCell).idOwner;
+}
