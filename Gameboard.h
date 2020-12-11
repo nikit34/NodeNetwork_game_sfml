@@ -34,7 +34,17 @@ protected:
 	std::vector<Player>* players;
 	std::vector<Cell> cells;
 	std::deque<Link> links;
+	static sf::Clock elapsed;
+	std::vector<float> frequenceRotation;
 
 private:
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+
+	static const uint16_t NB;
+	static const float MIN_DIST;
+	static const float BORDER;
+	static const uint16_t MIN_CAPACITY;
+	static const uint16_t MAX_CAPACITY;
+	static const float WIDTH;
+	static const float HEIGHT;
 };
