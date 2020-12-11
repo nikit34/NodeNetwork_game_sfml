@@ -143,7 +143,7 @@ void Client::actionFree(int mouseX, int mouseY) {
     sf::Packet packet;
     sf::Uint8 code = this->FREE;
     sf::Uint16 org = idCell;
-    packet << code << idPlayer << org;
+    packet << code << this->idPlayer << org;
     this->socket.send(packet);
 }
 
