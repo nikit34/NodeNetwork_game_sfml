@@ -55,6 +55,13 @@ void Link::update(float dt) {
     }
 }
 
+void Link::invert() {
+    Cell* temp = this->org;
+    this->org = this->dest;
+    this->dest = temp;
+    setArrow();
+}
+
 void Link::nextState() {
     ++this->state;
     if (this->state == this->COUNT)

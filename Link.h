@@ -14,6 +14,7 @@ public:
     sf::Vector2f getDestPos() const;
     float getDestRadius() const;
     void init();
+    void invert();
 
     void update(float dt);
     void nextState();
