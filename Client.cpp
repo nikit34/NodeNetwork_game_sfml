@@ -137,16 +137,41 @@ void Client::actionLink(int orgX, int orgY, int destX, int destY) {
     }
 }
 
-void Client::actionFree(int mouseX, int mouseY)
-{
+void Client::actionFree(int mouseX, int mouseY) {
+    sf::Uint16 idCell = this->gboard.getCloserCell(mouseX, mouseY);
+    gboard.free(this->idPlayer, idCell);
+    sf::Packet packet;
+    sf::Uint8 code = this->FREE;
+    sf::Uint16 org = idCell;
+    packet << code << idPlayer << org;
+    this->socket.send(packet);
 }
 
-void Client::actionFree(sf::Uint8 nidPlayer, int mouseX, int mouseY)
-{
+void Client::actionFree(sf::Uint8 nidPlayer, int mouseX, int mouseY) {
+    sf::Uint16 idCell = this->gboard.getCloserCell(mouseX, mouseY);
+    this->gboard.free(nidPlayer, idCell);
+    sf::Packet packet;
+    sf::Uint8 code = this->FREE;
+    sf::Uint16 org = idCell;
+    packet << code << nidPlayer << org;
+    this->socket.send(packet);
 }
 
-void Client::actionChangeLink(int orgX, int orgY, int destX, int destY)
-{
+
+void Client::actionChangeLink(int orgX, int orgY, int destX, int destY) {
+    int idOrg = this->gboard.getCloserCell(orgX, orgY);
+    if (idOrg >= 0 && this->gboard.getOwner(idOrg) == this->idPlayer) {
+        int idDest = this->gboard.getCloserCell(destX, destY);
+        if (idDest >= 0) {
+            this->gboard.changeLinkState(idOrg, idDest);
+            sf::Packet packet;
+            sf::Uint8 code = this->CHANGE;
+            sf::Uint16 org = idOrg;
+            sf::Uint16 dest = idDest;
+            packet << code << org << dest;
+            this->socket.send(packet);
+        }
+    }
 }
 
 void Client::manageNetwork() {
