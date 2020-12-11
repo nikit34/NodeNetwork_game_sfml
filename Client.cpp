@@ -30,3 +30,39 @@ void Client::run() {
 void Client::manageEvents(sf::Event event) {
 
 }
+
+void Client::actionLink(int orgX, int orgY, int destX, int destY)
+{
+}
+
+void Client::actionFree(int mouseX, int mouseY)
+{
+}
+
+void Client::actionFree(sf::Uint8 nidPlayer, int mouseX, int mouseY)
+{
+}
+
+void Client::actionChangeLink(int orgX, int orgY, int destX, int destY)
+{
+}
+
+void Client::manageNetwork()
+{
+}
+
+void Client::networkActions(sf::Packet& p, sf::Uint8 code)
+{
+}
+
+void Client::waitServer()
+{
+}
+
+void Client::menuWaitingRoom()
+{
+}
+
+void Client::menuServerList()
+{
+}

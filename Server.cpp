@@ -18,3 +18,47 @@ void Server::launch() {
 
 	this->gboard.init();
 }
+
+void Server::manageEvents(sf::Event event)
+{
+}
+
+void Server::actionLink(int orgX, int orgY, int destX, int destY)
+{
+}
+
+void Server::actionFree(int mouseX, int mouseY)
+{
+}
+
+void Server::actionFree(sf::Uint8 nidPlayer, int mouseX, int mouseY)
+{
+}
+
+void Server::actionChangeLink(int orgX, int orgY, int destX, int destY)
+{
+}
+
+void Server::menuWaitingRoom()
+{
+}
+
+void Server::waitClient()
+{
+}
+
+void Server::waitAll()
+{
+}
+
+void Server::manageNetwork()
+{
+}
+
+void Server::addPlayer()
+{
+}
+
+void Server::resyncClients()
+{
+}
