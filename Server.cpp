@@ -65,10 +65,6 @@ void Server::launch() {
 	}
 }
 
-void Server::manageEvents(sf::Event event)
-{
-}
-
 void Server::actionLink(int orgX, int orgY, int destX, int destY)
 {
 }
@@ -256,10 +252,6 @@ void Server::waitClient() {
 			}
 		}
 	}
-}
-
-void Server::waitAll()
-{
 }
 
 void Server::manageNetwork()
