@@ -166,8 +166,51 @@ void Client::networkActions(sf::Packet& p, sf::Uint8 code)
 {
 }
 
-void Client::waitServer()
-{
+void Client::waitServer() {
+    while (this->serverAddress == sf::IpAddress::None) 
+        sf::sleep(sf::milliseconds(1000));
+    
+    std::cout << "Try connect: " + this->serverAddress.toString() << std::endl;
+
+    sf::Socket::Status status = socket.connect(this->serverAddress, this->PORT_GAME_A);
+    if (status != sf::Socket::Done) {
+        std::cout << "Impossible connecting..." << std::endl;
+        this->serverAddress = sf::IpAddress::None;
+        this->waitServer();
+        return;
+    }
+    else {
+        std::cout << "connected!" << std::endl;
+        this->connected = true;
+    }
+
+    std::cout << "waiting for other players..." << std::endl;
+
+    this->socket.setBlocking(false);
+    sf::Packet packetInfo;
+    this->start = false;
+    while (!this->start && !this->exitCurrentGame) {
+        if (this->socket.receive(packetInfo) == sf::Socket::Done) {
+            if (packetInfo >> this->playerConnected >> this->playerMax >> this->serverStatus) {
+                if (this->idPlayer == 0) {
+                    this->idPlayer = this->playerConnected;
+                    std::cout << "Your ID: " << (int)this->idPlayer << std::endl;
+                }
+            }
+        }
+        if(this->playerConnected == this->playerMax){
+            std::cout << "All ready!" << std::endl;
+        }
+        if (this->serverStatus == this->SERVER_START_GAME) {
+            this->start = true;
+            break;
+        }
+    }
+    if (this->start && !this->exitCurrentGame) {
+        for (int i = 1; i < (int)this->playerMax; ++i) {
+            this->players.push_back(Player(1 + i));
+        }
+    }
 }
 
 void Client::menuWaitingRoom()
