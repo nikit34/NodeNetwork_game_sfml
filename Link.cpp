@@ -59,7 +59,7 @@ void Link::invert() {
     Cell* temp = this->org;
     this->org = this->dest;
     this->dest = temp;
-    setArrow();
+    this->setArrow();
 }
 
 void Link::nextState() {

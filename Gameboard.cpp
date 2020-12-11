@@ -85,7 +85,26 @@ void Gameboard::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 }
 
 void Gameboard::link(int idOrg, int idDest, float strength) {
-    
+    if (idOrg < 0 || idDest < 0 || 
+        idOrg >= (int)this->cells.size() ||
+        idDest >= (int)this->cells.size() ||
+        idOrg == idDest)
+        return;
+
+
+    for (std::deque<Link>::iterator it = this->links.begin(); it < this->links.end(); ++it) {
+        // delete trash arrows
+        if (&this->cells[idOrg] == it->dest && &this->cells[idDest] == it->org) {
+            it->invert();
+            return;
+        }
+        else if (&this->cells[idOrg] == it->org && &this->cells[idDest] == it->dest) {
+            this->links.erase(it);
+            return;
+        }
+    }
+
+    this->links.push_back(Link(&this->cells[idOrg], &this->cells[idDest], strength));
 }
 
 void Gameboard::update(float dt) {
