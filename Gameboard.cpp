@@ -39,7 +39,7 @@ void Gameboard::initPlayers() {
             this->cells[c].capacity += 100;
             this->cells[c].units += 100;
         }
-        else
+        else // for loop with randomize search of condition 
             --i;
     }
 }
@@ -56,8 +56,12 @@ void Gameboard::update(float dt) {
     for (std::vector<Cell>::iterator it = cells.begin(); it != cells.end(); ++it) {
         it->update(dt);
     }
+    for (std::deque<Link>::iterator it = links.begin(); it < links.end(); ++it) {
+        it->update(dt);
+    }
 }
 
+// search closer by self radius
 int Gameboard::getCloserCell(float x, float y) {
     int id = 0;
     float dx, dy, sr;

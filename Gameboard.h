@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <deque>
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Network.hpp>
