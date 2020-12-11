@@ -2,13 +2,6 @@
 
 
 
-Player::Player(int id) : id(id) {
-    if (this->id > 9)
-        this->color = sf::Color(250, 250, 250);
-    else
-        this->color = DEFAULT_COLOR[this->id];
-}
-
 Player::Player(int id, sf::Color color) : id(id), color(color) { }
 
 Player::~Player() { }
@@ -25,3 +18,10 @@ sf::Color Player::DEFAULT_COLOR[] = {
     sf::Color(128, 255, 255),
     sf::Color(255,128,255)
 };
+
+Player::Player(int id) : id(id) {
+    if (this->id > 9)
+        this->color = sf::Color(250, 250, 250);
+    else
+        this->color = DEFAULT_COLOR[this->id];
+}

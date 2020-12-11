@@ -3,10 +3,11 @@
 
 
 Game::Game() :
-	window(sf::VideoMode(800, 600), "SFML works!"), gboard(&players) {
-    idPlayer = 1;
-    players.push_back(Player(1, sf::Color(0, 255, 0)));
-    players.push_back(Player(2, sf::Color::Red));
+	window(sf::VideoMode(800, 600), "SFML works!"), 
+    gboard(&players), idPlayer(1), posClickedMouse(-1, -1) {
+    this->idPlayer = 1;
+    this->players.push_back(Player(1, sf::Color(0, 255, 0)));
+    this->players.push_back(Player(2, sf::Color::Red));
 }
 
 Game::~Game() { }

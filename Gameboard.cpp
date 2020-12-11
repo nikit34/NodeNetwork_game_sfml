@@ -136,10 +136,9 @@ int Gameboard::getCloserCell(sf::Vector2f coord) {
 }
 
 void Gameboard::free(int idPlayer, int idCell) {
-    if (idCell < 0) 
+    if (idCell < 0 || this->cells[idCell].getOwner() != idPlayer)
         return;
-    if (this->cells[idCell].getOwner() != idPlayer) 
-        return;
+
     for (std::deque<Link>::iterator it = this->links.begin(); it < this->links.end();) {
         if (it->org == &this->cells[idCell] || it->dest == &this->cells[idCell]) {
             it = this->links.erase(it);
