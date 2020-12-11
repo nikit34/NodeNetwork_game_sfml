@@ -3,7 +3,7 @@
 
 
 Server::Server(sf::RenderWindow& win) : Client(win) {
-	// !!! window is client !!!
+	// window is client 
 	this->window.setTitle("server");
 	this->idPlayer = 1;
 }
@@ -326,8 +326,9 @@ void Server::manageNetwork() {
 	}
 }
 
-void Server::addPlayer()
-{
+void Server::addPlayer() {
+	++this->playerMax;
+	this->players.push_back(Player(this->playerMax));
 }
 
 void Server::resyncClients() {
