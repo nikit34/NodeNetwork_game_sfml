@@ -67,8 +67,18 @@ void Client::manageEvents(sf::Event event) {
 
 }
 
-void Client::actionLink(int orgX, int orgY, int destX, int destY)
-{
+void Client::actionLink(int orgX, int orgY, int destX, int destY) {
+    int idOrg = this->gboard.getCloserCell(orgX, orgY);
+    if (idOrg >= 0 && this->gboard.getOwner(idOrg) == this->idPlayer) {
+        int idDest = this->gboard.getCloserCell(destX, destY);
+        this->gboard.link(idOrg, idDest);
+        sf::Packet packet;
+        sf::Uint8 code = this->LINK;
+        sf::Uint16 org = idOrg;
+        sf::Uint16 dest = idDest;
+        packet << code << org << dest;
+        this->socket.send(packet);
+    }
 }
 
 void Client::actionFree(int mouseX, int mouseY)
