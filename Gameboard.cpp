@@ -77,15 +77,31 @@ int Gameboard::getCloserCell(float x, float y) {
 }
 
 int Gameboard::getCloserCell(sf::Vector2f coord) {
-    return getCloserCell(coord.x, coord.y);
+    return this->getCloserCell(coord.x, coord.y);
 }
 
 void Gameboard::free(int idPlayer, int idCell) {
-
+    if (idCell < 0) 
+        return;
+    if (this->cells[idCell].getOwner() != idPlayer) 
+        return;
+    for (std::deque<Link>::iterator it = this->links.begin(); it < this->links.end();) {
+        if (it->org == &this->cells[idCell] || it->dest == &this->cells[idCell]) {
+            it = this->links.erase(it);
+        }
+        else {
+            ++it;
+        }
+    }
 }
 
 void Gameboard::changeLinkState(int idOrg, int idDest) {
-
+    for (std::deque<Link>::iterator it = this->links.begin(); it < this->links.end(); ++it) {
+        if (it->org == &this->cells[idOrg] && it->dest == &this->cells[idDest]) {
+            it->nextState();
+            break;
+        }
+    }
 }
 
 int Gameboard::getOwner(int idCell) {

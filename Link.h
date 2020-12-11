@@ -16,14 +16,22 @@ public:
     void init();
 
     void update(float dt);
+    void nextState();
+    enum States { NORMAL, FULL, COUNT };
 
 protected:
+    void setArrow();
+
     Cell* org;
     Cell* dest;
     float strenght;
     float time;
+    int state;
 
     static const float TIME_SCALE;
+    static const float ARROW_SIZE;
+
+    sf::CircleShape arrow;
 
 private:
     friend class Gameboard;
