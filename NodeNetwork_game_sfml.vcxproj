@@ -151,6 +151,7 @@
   <ItemGroup>
     <ClCompile Include="Cell.cpp" />
     <ClCompile Include="Client.cpp" />
+    <ClCompile Include="ClientMenuServerList.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Gameboard.cpp" />
     <ClCompile Include="Link.cpp" />
@@ -163,6 +164,7 @@
   <ItemGroup>
     <ClInclude Include="Cell.h" />
     <ClInclude Include="Client.h" />
+    <ClInclude Include="ClientMenuServerList.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Gameboard.h" />
     <ClInclude Include="Link.h" />

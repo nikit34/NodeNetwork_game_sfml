@@ -5,7 +5,7 @@
 #include <SFML/Network.hpp>
 
 #include "Game.h"
-#include "Server.h"
+#include "ClientMenuServerList.h"
 
 
 
@@ -19,6 +19,18 @@ public:
 
     void manageEvents(sf::Event event);
 
+    virtual void actionLink(int orgX, int orgY, int destX, int destY);
+    virtual void actionFree(int mouseX, int mouseY);
+    virtual void actionFree(sf::Uint8 nidPlayer, int mouseX, int mouseY);
+    virtual void actionChangeLink(int orgX, int orgY, int destX, int destY);
+    virtual void manageNetwork();
+    void networkActions(sf::Packet& p, sf::Uint8 code);
+    void waitServer();
+    enum CODE { LINK, FREE, CHANGE, SYNCHRONIZE_GBOARD };
+    enum STATE { SERVER_READY, SERVER_NOT_READY, SERVER_START_GAME };
+    virtual void menuWaitingRoom();
+    void menuServerList();
+
 protected:
     sf::RenderWindow& window;
     Gameboard gboard;
@@ -30,6 +42,17 @@ protected:
     sf::Uint8 serverStatus;
     sf::Uint8 playerConnected;
     sf::Uint8 playerMax;
+
+    sf::TcpSocket socket;
+    sf::UdpSocket socket_udp;
+    sf::IpAddress serverAddress;
+
+    sf::Uint8 serverStatus;
+    sf::Uint8 playerConnected;
+    sf::Uint8 playerMax;
+    static const unsigned short int PORT_GAME_A = 53000; // tcp
+    static const unsigned short int PORT_GAME_B = 54000; // udp
+
 
     bool start;
     bool connected;
