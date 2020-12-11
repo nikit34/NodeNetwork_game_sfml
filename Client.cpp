@@ -162,8 +162,26 @@ void Client::manageNetwork() {
         networkActions(packet, code);
 }
 
-void Client::networkActions(sf::Packet& p, sf::Uint8 code)
-{
+void Client::networkActions(sf::Packet& packet, sf::Uint8 code) {
+    sf::Uint16 org, dest;
+    sf::Uint8 nidPlayer;
+    if (code == this->LINK) {
+        packet >> org >> dest;
+        if (org >= 0 && dest >= 0)
+            this->gboard.link(org, dest);
+    }
+    else if (code == this->CHANGE) {
+        packet >> org >> dest;
+        if (org >= 0 && dest >= 0)
+            this->gboard.changeLinkState(org, dest);
+    }
+    else if (code == this->FREE) {
+        packet >> nidPlayer >> org;
+        this->gboard.free(nidPlayer, org);
+    }
+    else if (code == this->SYNCHRONIZE_GBOARD) {
+        packet >> this->gboard;
+    }
 }
 
 void Client::waitServer() {
