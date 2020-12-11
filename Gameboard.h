@@ -30,6 +30,9 @@ public:
 	int getOwner(int idCell);
 	void free(int idPlayer, int idCell);
 
+	friend sf::Packet& operator>>(sf::Packet& packet, Gameboard& gameboard);
+	friend sf::Packet& operator<<(sf::Packet& packet, const Gameboard& gameboard);
+
 protected:
 	std::vector<Player>* players;
 	std::vector<Cell> cells;
@@ -48,3 +51,7 @@ private:
 	static const float WIDTH;
 	static const float HEIGHT;
 };
+
+
+sf::Packet& operator>>(sf::Packet& packet, Gameboard& gboard);
+sf::Packet& operator<<(sf::Packet& packet, const Gameboard& gboard);

@@ -161,3 +161,36 @@ void Gameboard::changeLinkState(int idOrg, int idDest) {
 int Gameboard::getOwner(int idCell) {
     return this->cells.at(idCell).idOwner;
 }
+
+sf::Packet& operator>> (sf::Packet& packet, Gameboard& gboard) {
+    sf::Uint8 new_size = 0;
+    packet >> new_size;
+    gboard.cells.resize(new_size, Cell());
+    for (uint64_t i = 0; i < gboard.cells.size(); ++i) {
+        packet >> 
+            gboard.cells[i].radius >> 
+            gboard.cells[i].pos.x >> 
+            gboard.cells[i].pos.y >> 
+            gboard.cells[i].idOwner >> 
+            gboard.cells[i].capacity >> 
+            gboard.cells[i].units >> 
+            gboard.cells[i].time;
+    }
+    return packet;
+}
+
+sf::Packet& operator<< (sf::Packet& packet, const Gameboard& gboard) {
+    sf::Uint8 new_size = gboard.cells.size();
+    packet << new_size;
+    for (uint64_t i = 0; i < new_size; ++i) {
+        packet << 
+            gboard.cells[i].radius << 
+            gboard.cells[i].pos.x << 
+            gboard.cells[i].pos.y << 
+            gboard.cells[i].idOwner << 
+            gboard.cells[i].capacity << 
+            gboard.cells[i].units << 
+            gboard.cells[i].time;
+    }
+    return packet;
+}

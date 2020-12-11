@@ -8,6 +8,7 @@ class Gameboard;
 
 class Cell {
 public:
+    Cell() {};
 	Cell(float radius, sf::Vector2f pos, float capacity);
 	Cell(float radius, float posx, float posy, float capacity);
     virtual ~Cell();
@@ -30,4 +31,11 @@ protected:
 private:
 	friend class Gameboard;
 	friend class Link;
+
+    friend sf::Packet& operator>> (sf::Packet& packet, Gameboard& gboard);
+    friend sf::Packet& operator<< (sf::Packet& packet, const Gameboard& gboard);
 };
+
+class Gameboard;
+sf::Packet& operator>> (sf::Packet& packet, Gameboard& gboard);
+sf::Packet& operator<< (sf::Packet& packet, const Gameboard& gboard);

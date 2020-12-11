@@ -53,7 +53,6 @@ protected:
     static const unsigned short int PORT_GAME_A = 53000; // tcp
     static const unsigned short int PORT_GAME_B = 54000; // udp
 
-
     bool start;
     bool connected;
     bool exitCurrentGame;

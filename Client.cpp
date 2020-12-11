@@ -17,10 +17,46 @@ Client::~Client() { }
 
 void Client::launch() {
     this->start = false;
-    connected = false;
-    exitCurrentGame = false;
+    this->connected = false;
+    this->exitCurrentGame = false;
 
-    gboard.init();
+    this->gboard.init();
+    this->serverAddress = sf::IpAddress::None;
+    sf::Thread thread(&Client::waitServer, &(*this));
+
+    thread.launch();
+
+    // open UDP
+    this->socket_udp.setBlocking(false);
+    if (this->socket_udp.bind(this->PORT_GAME_B) != sf::Socket::Done)
+        std::cout << "[ERROR] UDP error open" << std::endl;
+
+
+    this->menuServerList();
+
+    if (!this->window.isOpen()) {
+        this->start = true;
+        thread.terminate();
+        return;
+    }
+
+    this->socket_udp.unbind();
+
+    this->menuWaitingRoom();
+
+    thread.terminate();
+
+    if (!this->exitCurrentGame) {
+        this->socket.setBlocking(true);
+        sf::Packet packet;
+        this->socket.receive(packet);
+        if (packet >> this->gboard) {
+            std::cout << "Carte recue" << std::endl;
+            this->run();
+        }
+        else
+            std::cout << "erreur de reception du jeu ..." << std::endl;
+    }
 }
 
 void Client::run() {
