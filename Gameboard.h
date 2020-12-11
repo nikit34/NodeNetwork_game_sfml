@@ -1,4 +1,5 @@
 #pragma once
+#include <vector>
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Network.hpp>
@@ -19,9 +20,14 @@ public:
 	void reset();
 	void randomize();
 	void initPlayers();
-	void update();
+	void update(float dt);
+	int getCloserCell(float x, float y);
+	int getCloserCell(sf::Vector2f coord);
 
 protected:
 	std::vector<Player>* players;
 	std::vector<Cell> cells;
+
+private:
+	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 };
