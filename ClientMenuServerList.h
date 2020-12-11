@@ -8,7 +8,7 @@
 
 class MenuServerList : public Menu {
 public:
-    MenuServerList(sf::RenderWindow& win, sf::UdpSocket& sock, bool& co, sf::IpAddress& serv_add, sf::Uint8& servStatus);
+    MenuServerList(sf::RenderWindow& win, sf::UdpSocket& sock_udp, bool& n_connected, sf::IpAddress& ip_serv, sf::Uint8& servStatus);
     ~MenuServerList();
     virtual void run();
 

@@ -47,9 +47,6 @@ protected:
     sf::UdpSocket socket_udp;
     sf::IpAddress serverAddress;
 
-    sf::Uint8 serverStatus;
-    sf::Uint8 playerConnected;
-    sf::Uint8 playerMax;
     static const unsigned short int PORT_GAME_A = 53000; // tcp
     static const unsigned short int PORT_GAME_B = 54000; // udp
 
