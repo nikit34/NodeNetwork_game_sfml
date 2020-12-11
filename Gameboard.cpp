@@ -53,10 +53,10 @@ void Gameboard::link(int idOrg, int idDest, float strength) {
 }
 
 void Gameboard::update(float dt) {
-    for (std::vector<Cell>::iterator it = cells.begin(); it != cells.end(); ++it) {
+    for (std::vector<Cell>::iterator it = this->cells.begin(); it != this->cells.end(); ++it) {
         it->update(dt);
     }
-    for (std::deque<Link>::iterator it = links.begin(); it < links.end(); ++it) {
+    for (std::deque<Link>::iterator it = this->links.begin(); it < this->links.end(); ++it) {
         it->update(dt);
     }
 }
@@ -65,7 +65,7 @@ void Gameboard::update(float dt) {
 int Gameboard::getCloserCell(float x, float y) {
     int id = 0;
     float dx, dy, sr;
-    for (std::vector<Cell>::iterator it = cells.begin(); it != cells.end(); it++) {
+    for (std::vector<Cell>::iterator it = this->cells.begin(); it != this->cells.end(); it++) {
         dx = it->pos.x - x;
         dy = it->pos.y - y;
         sr = it->radius;
