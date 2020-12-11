@@ -25,6 +25,12 @@ protected:
     std::vector<Player> players;
     sf::Uint8 idPlayer;
 
+    sf::Vector2f posClickedMouse;
+
+    sf::Uint8 serverStatus;
+    sf::Uint8 playerConnected;
+    sf::Uint8 playerMax;
+
     bool start;
     bool connected;
     bool exitCurrentGame;

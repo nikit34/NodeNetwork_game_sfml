@@ -3,16 +3,20 @@
 
 
 Client::Client(sf::RenderWindow& win) : 
-    window(win), gboard(&players), idPlayer(0),
-    start(false), connected(false), exitCurrentGame(false) {
+    window(win), gboard(&players), exitCurrentGame(false), 
+    posClickedMouse(-1, -1), idPlayer(0),
+    connected(false), start(false), playerConnected(1) {
 	this->window.setTitle("client");
+    this->idPlayer = 0;
+    this->playerMax = 1;
+    this->players.push_back(Player(1));
 }
 
 Client::~Client() { }
 
 
 void Client::launch() {
-    start = false;
+    this->start = false;
     connected = false;
     exitCurrentGame = false;
 
