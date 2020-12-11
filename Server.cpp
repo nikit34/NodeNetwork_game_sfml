@@ -65,8 +65,19 @@ void Server::launch() {
 	}
 }
 
-void Server::actionLink(int orgX, int orgY, int destX, int destY)
-{
+void Server::actionLink(int orgX, int orgY, int destX, int destY) {
+	int idOrg = this->gboard.getCloserCell(orgX, orgY);
+	if (idOrg >= 0 && this->gboard.getOwner(idOrg) == this->idPlayer) {
+		int idDest = this->gboard.getCloserCell(destX, destY);
+		this->gboard.link(idOrg, idDest);
+		sf::Packet packet;
+		sf::Uint8 code = this->LINK;
+		sf::Uint16 org = idOrg;
+		sf::Uint16 dest = idDest;
+		packet << code << org << dest;
+		for (std::vector<sf::TcpSocket*>::iterator it = this->sockets.begin(); it != this->sockets.end(); ++it)
+			(**it).send(packet);
+	}
 }
 
 void Server::actionFree(int mouseX, int mouseY)
