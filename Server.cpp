@@ -5,7 +5,7 @@
 Server::Server(sf::RenderWindow& win) : Client(win) {
 	// !!! window is client !!!
 	this->window.setTitle("server");
-
+	this->idPlayer = 1;
 }
 
 Server::~Server() { }

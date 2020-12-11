@@ -7,6 +7,7 @@
 
 #include "Player.h"
 #include "Cell.h"
+#include "Link.h"
 
 
 
@@ -32,6 +33,7 @@ public:
 protected:
 	std::vector<Player>* players;
 	std::vector<Cell> cells;
+	std::deque<Link> links;
 
 private:
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;

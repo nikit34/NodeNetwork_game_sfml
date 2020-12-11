@@ -2,7 +2,9 @@
 
 
 
-Client::Client(sf::RenderWindow& win) : window(win), gboard(&players) {
+Client::Client(sf::RenderWindow& win) : 
+    window(win), gboard(&players), idPlayer(0),
+    start(false), connected(false), exitCurrentGame(false) {
 	this->window.setTitle("client");
 }
 

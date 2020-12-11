@@ -23,6 +23,7 @@ protected:
     sf::RenderWindow& window;
     Gameboard gboard;
     std::vector<Player> players;
+    sf::Uint8 idPlayer;
 
     bool start;
     bool connected;
