@@ -16,11 +16,11 @@ void Gameboard::init() {
     this->initPlayers();
 }
 
+sf::Clock Gameboard::elapsed;
 
 void Gameboard::reset() {
     this->cells.clear();
 }
-
 
 const uint16_t Gameboard::NB = 25;
 const float Gameboard::MIN_DIST = 20.f;
@@ -138,7 +138,6 @@ void Gameboard::link(int idOrg, int idDest, float strength) {
         idOrg == idDest)
         return;
 
-
     for (std::deque<Link>::iterator it = this->links.begin(); it < this->links.end(); ++it) {
         // delete trash arrows
         if (&this->cells[idOrg] == it->dest && &this->cells[idDest] == it->org) {
@@ -241,3 +240,6 @@ sf::Packet& operator<< (sf::Packet& packet, const Gameboard& gboard) {
     }
     return packet;
 }
+
+
+

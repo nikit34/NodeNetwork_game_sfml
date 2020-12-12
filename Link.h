@@ -34,6 +34,8 @@ protected:
 
     sf::CircleShape arrow;
 
+    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+
 private:
     friend class Gameboard;
 };

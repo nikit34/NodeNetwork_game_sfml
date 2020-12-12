@@ -57,16 +57,6 @@ MenuServerList::MenuServerList(sf::RenderWindow& win, sf::UdpSocket& sock_udp, b
 MenuServerList::~MenuServerList() { }
 
 
-template<typename T>
-std::string ttos(T t) {
-    std::stringstream ss;
-    std::string s;
-    if (ss << t) {
-        ss >> s;
-        return s;
-    }
-    return "";
-}
 
 void MenuServerList::run() {
     bool exitCurrentGame = false;

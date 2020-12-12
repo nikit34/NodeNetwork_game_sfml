@@ -90,3 +90,7 @@ sf::Vector2f Link::getDestPos() const {
 float Link::getDestRadius() const {
     return this->dest->radius;
 }
+
+void Link::draw(sf::RenderTarget& target, sf::RenderStates states) const {
+    target.draw(this->arrow);
+}
