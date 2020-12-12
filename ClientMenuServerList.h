@@ -38,6 +38,6 @@ protected:
     sf::Uint8& serverStatus;
 
     const float FIRST_LINE_Y = 10.f;
-    const float POSBAR_Y = 10.f;// = FIRST_LINE_Y;
+    const float POSBAR_Y = 10.f;
     float POSBAR_X;
 };

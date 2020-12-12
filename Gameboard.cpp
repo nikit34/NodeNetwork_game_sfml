@@ -22,7 +22,7 @@ void Gameboard::reset() {
     this->cells.clear();
 }
 
-const uint16_t Gameboard::NB = 25;
+const uint16_t Gameboard::NUMBER = 25;
 const float Gameboard::MIN_DIST = 20.f;
 const float Gameboard::BORDER = 5.f;
 const uint16_t Gameboard::MIN_CAPACITY = 25;
@@ -34,13 +34,14 @@ void Gameboard::randomize() {
     bool ok;
     int security = 0;
     float radius, x, y, dx, dy, spredRadius, freqRot;
-    int c;            
-    for (uint32_t i = 0; i < this->NB; ++i) {
+    int capacity;
+    for (uint32_t i = 0; i < this->NUMBER; ++i) {
         ok = true;
+        // (float)rand() / (float)RAND_MAX  ----- between 0 and 1
         radius = (float)rand() / (float)RAND_MAX * 90.f + 20.f;
         x = (float)rand() / (float)RAND_MAX * (this->WIDTH - 2.f * (radius + this->BORDER)) + radius + this->BORDER;
         y = (float)rand() / (float)RAND_MAX * (this->HEIGHT - 2.f * (radius + this->BORDER)) + radius + this->BORDER;
-        c = rand() % (this->MAX_CAPACITY - this->MIN_CAPACITY - (int)(radius / 2.5f)) + this->MIN_CAPACITY;
+        capacity = rand() % (this->MAX_CAPACITY - this->MIN_CAPACITY - (int)(radius / 2.5f)) + this->MIN_CAPACITY;
         for (uint32_t j = 0; j < this->cells.size(); ++j) {
             dx = this->cells[j].pos.x - x;
             dy = this->cells[j].pos.y - y;
@@ -53,11 +54,11 @@ void Gameboard::randomize() {
             }
         }
         if (ok) {
-            this->cells.push_back(Cell(radius, x, y, c));
+            this->cells.push_back(Cell(radius, x, y, capacity));
             freqRot = ((float)rand() / RAND_MAX - 0.5f) / 6.f;
             this->frequenceRotation.push_back((freqRot != 0.f ? freqRot : 0.01f));
         }
-        if (security > this->NB * 10.f) {
+        if (security > this->NUMBER * 10.f) {
             break;
         }
     }

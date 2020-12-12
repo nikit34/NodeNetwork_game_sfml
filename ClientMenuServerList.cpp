@@ -11,7 +11,7 @@ MenuServerList::MenuServerList(sf::RenderWindow& win, sf::UdpSocket& sock_udp, b
     this->textManualIp.setFont(font);
     this->textManualIp.setCharacterSize(24);
     this->textManualIp.setString("Manual ip  : ");
-    this->textManualIp.setPosition(10.f, FIRST_LINE_Y);
+    this->textManualIp.setPosition(10.f, this->FIRST_LINE_Y);
 
     this->buttonManualIp.setFont(font);
     this->buttonManualIp.setCharacterSize(24);
@@ -81,7 +81,7 @@ void MenuServerList::run() {
                 else
                     if (event.type == sf::Event::MouseButtonPressed) {
                         if (event.mouseButton.button == sf::Mouse::Left) {
-                            for (unsigned int i = 0; i < this->listServButton.size(); ++i) {
+                            for (uint64_t i = 0; i < this->listServButton.size(); ++i) {
                                 if (this->listServButton[i].getGlobalBounds().contains(
                                     this->window.mapPixelToCoords(
                                         sf::Mouse::getPosition(this->window)
@@ -93,8 +93,9 @@ void MenuServerList::run() {
 
                             if (this->buttonManualIp.getGlobalBounds().contains(
                                 this->window.mapPixelToCoords(
-                                    (sf::Mouse::getPosition(this->window))))
-                                && this->directIp != sf::IpAddress::None) {
+                                    sf::Mouse::getPosition(this->window)
+                                )
+                            ) && this->directIp != sf::IpAddress::None) {
                                 this->serverAddress = this->directIp;
                             }
                         }
@@ -158,7 +159,7 @@ void MenuServerList::run() {
                 }
                 s += "\n";
                 bool founded = false;
-                for (unsigned int i = 0; i < this->listServIp.size(); ++i) {
+                for (uint64_t i = 0; i < this->listServIp.size(); ++i) {
                     if (this->listServIp[i] == this->serv_ip.toInteger()) {
                         founded = true;
                         this->listServText[i] = s;
@@ -195,9 +196,8 @@ void MenuServerList::run() {
             }
         }
         if (this->buttonManualIp.getGlobalBounds().contains(this->window.mapPixelToCoords(
-            (sf::Mouse::getPosition(this->window))))
-            && this->directIp != sf::IpAddress::None)
-        {
+            sf::Mouse::getPosition(this->window)
+            )) && this->directIp != sf::IpAddress::None) {
             this->buttonManualIp.setFillColor(sf::Color(200, 200, 255, 200));
         } 
         else {

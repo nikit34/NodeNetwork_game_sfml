@@ -47,7 +47,7 @@ protected:
 private:
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
-	static const uint16_t NB;
+	static const uint16_t NUMBER;
 	static const float MIN_DIST;
 	static const float BORDER;
 	static const uint16_t MIN_CAPACITY;

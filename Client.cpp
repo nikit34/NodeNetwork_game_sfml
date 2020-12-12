@@ -306,11 +306,11 @@ void Client::menuWaitingRoom() {
 
 void Client::menuServerList() {
     MenuServerList menu(
-        this->window, 
-        this->socket_udp, 
-        this->connected, 
-        this->serverAddress, 
-        this->serverStatus
+        window, 
+        socket_udp, 
+        connected, 
+        serverAddress, 
+        serverStatus
     );
     menu.run();
     return;

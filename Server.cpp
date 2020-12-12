@@ -6,9 +6,17 @@ Server::Server(sf::RenderWindow& win) : Client(win) {
 	// window is client 
 	this->window.setTitle("server");
 	this->idPlayer = 1;
+	this->addPlayer();
+	this->addPlayer();
+	this->playerConnected = 1;
+	this->serverStatus = this->SERVER_NOT_READY;
 }
 
-Server::~Server() { }
+Server::~Server() { 
+	for (std::vector<sf::TcpSocket*>::iterator it = sockets.begin(); it != sockets.end(); ++it) {
+		delete* it;
+	}
+}
 
 
 void Server::launch() {
@@ -62,6 +70,11 @@ void Server::launch() {
 		std::cout << "Solo game" << std::endl;
 		this->timeElapsed.restart();
 		this->run();
+	}
+
+	for (std::vector<sf::TcpSocket*>::iterator it = sockets.begin(); it != sockets.end(); ++it) {
+		sf::TcpSocket& client = **it;
+		client.disconnect();
 	}
 }
 
@@ -280,7 +293,7 @@ void Server::waitClient() {
 				}
 			}
 		}
-		for (std::vector<sf::TcpSocket*>::iterator it = sockets.begin(); it != sockets.end(); ++it) {
+		for (std::vector<sf::TcpSocket*>::iterator it = this->sockets.begin(); it != this->sockets.end(); ++it) {
 			sf::TcpSocket& client = **it;
 			if (this->selector.isReady(client)) {
 				sf::Packet packet;
