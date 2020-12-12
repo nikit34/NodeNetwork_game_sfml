@@ -23,7 +23,6 @@ protected:
 	bool fullscreen;
 	sf::Text title;
 	sf::Text maintext;
-	sf::Font font;
 	sf::Image icon;
 
 private:

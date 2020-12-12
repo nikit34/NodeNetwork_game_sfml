@@ -12,17 +12,14 @@ MainMenu::MainMenu(sf::RenderWindow& window) : Menu(window), fullscreen(false) {
     );
 
     this->window.setFramerateLimit(60); // fps
-    if (this->icon.loadFromFile("Textures/icon.png"))
-        window.setIcon(256, 256, this->icon.getPixelsPtr());
+    //if (this->icon.loadFromFile("Textures/icon.png"))
+    //    window.setIcon(256, 256, this->icon.getPixelsPtr());
 
-    this->font.loadFromFile("Textures/JetBreins.ttf");
-
-    this->title = sf::Text("NodeNetwork", this->font, 46);
+    this->title = sf::Text("NodeNetwork", *FontManager::getFont("Textures/JetBreins.ttf"), 46);
     this->title.setFillColor(sf::Color(255, 0, 0));
     this->centerTextXaxis(this->title, 50.f);
 
-
-    this->maintext = sf::Text("Server", this->font, 32);
+    this->maintext = sf::Text("Server", *FontManager::getFont("Textures/JetBreins.ttf"), 32);
     this->option.resize(4);
     this->option[0].txt = this->maintext;
     // this shit take from book - move address of function to field struct of array 

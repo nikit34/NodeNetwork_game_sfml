@@ -92,7 +92,7 @@ void Gameboard::draw(sf::RenderTarget& target, sf::RenderStates states) const {
             sf::Vertex(it->getOrgPos()),
             sf::Vertex(it->getDestPos())
         };
-        line[0].color = (*this->players)[it->org->getOwner() - 1].getColor();
+        line[0].color = (*this->players)[it->org->getOwner() - (int)1].getColor();
         target.draw(line, 2, sf::Lines, states);
         target.draw(*it, states);
     }
@@ -119,9 +119,7 @@ void Gameboard::draw(sf::RenderTarget& target, sf::RenderStates states) const {
         sf::Text text;
         text.setFillColor(sf::Color::Black);
 
-        sf::Font font;
-        font.loadFromFile("Textures/JetBreins.ttf");
-        text.setFont(font);
+        text.setFont(*FontManager::getFont("Textures/JetBreins.ttf"));
         text.setCharacterSize(4 + cells[i].radius / 8);
         text.setString("" + ttos(cells[i].units) + " / " + ttos(cells[i].capacity));
         text.setOrigin(text.getLocalBounds().left + text.getGlobalBounds().width / 2.f,

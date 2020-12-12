@@ -257,16 +257,13 @@ void Client::waitServer() {
 }
 
 void Client::menuWaitingRoom() {
-    sf::Font font;
-    font.loadFromFile("Textures/JetBreins.ttf");
-
     sf::Text info;
-    info.setFont(font);
+    info.setFont(*FontManager::getFont("Textures/JetBreins.ttf"));
     info.setCharacterSize(24);
     info.setPosition(10.f, 10.f);
 
     sf::Text info2;
-    info2.setFont(font);
+    info2.setFont(*FontManager::getFont("Textures/JetBreins.ttf"));
     info2.setCharacterSize(18);
     info2.setPosition(10.f, 10.f);
     info2.move(0, 40.f);

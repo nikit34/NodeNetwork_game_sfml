@@ -157,6 +157,7 @@
     <ClCompile Include="Link.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenu.cpp" />
+    <ClCompile Include="Manager.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Server.cpp" />
@@ -169,6 +170,7 @@
     <ClInclude Include="Gameboard.h" />
     <ClInclude Include="Link.h" />
     <ClInclude Include="MainMenu.h" />
+    <ClInclude Include="Manager.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Server.h" />

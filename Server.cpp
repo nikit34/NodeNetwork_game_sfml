@@ -143,10 +143,8 @@ void Server::menuWaitingRoom() {
 	rect.setFillColor(sf::Color(0, 0, 0, 180));
 
 	sf::Text info;
-	sf::Font font;
-	font.loadFromFile("Textures/JetBreins.ttf");
 	
-	info.setFont(font);
+	info.setFont(*FontManager::getFont("Textures/JetBreins.ttf"));
 	info.setCharacterSize(24);
 	info.setString("Waiting for players ... ");
 	info.setOrigin(info.getLocalBounds().left + info.getGlobalBounds().width / 2.f,
@@ -168,7 +166,7 @@ void Server::menuWaitingRoom() {
 	buttonRemove.setPosition(500.f, 40.f);
 
 	sf::Text button_t;
-	button_t.setFont(font);
+	button_t.setFont(*FontManager::getFont("Textures/JetBreins.ttf"));
 	button_t.setCharacterSize(24);
 	button_t.setString("Start !");
 	button_t.setOrigin(button_t.getLocalBounds().left + button_t.getGlobalBounds().width / 2.f,

@@ -6,6 +6,7 @@
 
 #include "Menu.h"
 #include "Client.h"
+#include "Manager.h"
 
 
 

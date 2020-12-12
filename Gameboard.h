@@ -8,6 +8,7 @@
 
 #include "Player.h"
 #include "Link.h"
+#include "Manager.h"
 
 
 
