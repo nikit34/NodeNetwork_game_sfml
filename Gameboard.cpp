@@ -2,7 +2,7 @@
 
 
 
-Gameboard::Gameboard() { }
+Gameboard::Gameboard() : players(nullptr) { }
 
 Gameboard::Gameboard(std::vector<Player>* playerList) {
     this->players = playerList;
@@ -32,7 +32,7 @@ const float Gameboard::HEIGHT = 600.f;
 
 void Gameboard::randomize() {
     bool ok;
-    int security = 0;
+    uint64_t security = 0;
     float radius, x, y, dx, dy, spredRadius, freqRot;
     int capacity;
     for (uint32_t i = 0; i < this->NUMBER; ++i) {
@@ -92,7 +92,7 @@ void Gameboard::draw(sf::RenderTarget& target, sf::RenderStates states) const {
             sf::Vertex(it->getOrgPos()),
             sf::Vertex(it->getDestPos())
         };
-        line[0].color = (*this->players)[it->org->getOwner() - (int)1].getColor();
+        line[0].color = (*this->players)[(uint64_t)it->org->getOwner() - 1].getColor();
         target.draw(line, 2, sf::Lines, states);
         target.draw(*it, states);
     }

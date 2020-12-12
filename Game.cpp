@@ -2,7 +2,7 @@
 
 
 
-Game::Game() :
+Game::Game() : dt(1.f),
 	window(sf::VideoMode(800, 600), "SFML works!"), 
     gboard(&players), idPlayer(1), posClickedMouse(-1, -1) {
     this->idPlayer = 1;

@@ -20,7 +20,7 @@ sf::Color Player::DEFAULT_COLOR[] = {
 };
 
 Player::Player(int id) : id(id) {
-    if (this->id > 9)
+    if (this->id > 8)
         this->color = sf::Color(250, 250, 250);
     else
         this->color = DEFAULT_COLOR[this->id];

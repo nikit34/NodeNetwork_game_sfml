@@ -15,7 +15,7 @@ public:
 
 	void launch();
 
-    virtual void actionLink(int orgX, int orgY, int destX, int destY);
+    virtual void actionLink(float orgX, float orgY, float destX, float destY);
     virtual void actionFree(int mouseX, int mouseY);
     virtual void actionFree(sf::Uint8 nidPlayer, int mouseX, int mouseY);
     virtual void actionChangeLink(int orgX, int orgY, int destX, int destY);

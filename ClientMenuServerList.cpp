@@ -3,7 +3,7 @@
 
 
 MenuServerList::MenuServerList(sf::RenderWindow& win, sf::UdpSocket& sock_udp, bool& n_connected, sf::IpAddress& ip_serv, sf::Uint8& servStatus) :
-    Menu(win), socket_udp(sock_udp), connected(n_connected),
+    Menu(win), socket_udp(sock_udp), serv_port(8000), connected(n_connected),
     serverAddress(ip_serv), serverStatus(servStatus) {
     this->textManualIp.setFont(*FontManager::getFont("Textures/JetBreins.ttf"));
     this->textManualIp.setCharacterSize(24);
@@ -171,7 +171,6 @@ void MenuServerList::run() {
                     this->listServButton.back().setString(this->listServText.back());
                     this->listServTimeout.push_back(sf::Clock());
                 }
-
             }
         }
         for (uint64_t i = 0; i < this->listServIp.size(); ++i) {

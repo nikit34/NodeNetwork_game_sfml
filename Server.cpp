@@ -78,7 +78,7 @@ void Server::launch() {
 	}
 }
 
-void Server::actionLink(int orgX, int orgY, int destX, int destY) {
+void Server::actionLink(float orgX, float orgY, float destX, float destY) {
 	int idOrg = this->gboard.getCloserCell(orgX, orgY);
 	if (idOrg >= 0 && this->gboard.getOwner(idOrg) == this->idPlayer) {
 		int idDest = this->gboard.getCloserCell(destX, destY);
@@ -133,7 +133,7 @@ void Server::actionChangeLink(int orgX, int orgY, int destX, int destY) {
 }
 
 void Server::menuWaitingRoom() {
-	this->serverStatus = SERVER_READY;
+	this->serverStatus = 0;
 	sf::Packet info_server;
 
 	info_server << serverStatus;
@@ -217,7 +217,6 @@ void Server::menuWaitingRoom() {
 							this->players.pop_back();
 							this->gboard.initPlayers();
 						 }
-
 					}
 				}
 			}

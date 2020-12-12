@@ -70,11 +70,11 @@ void Link::nextState() {
     switch (this->state) {
     case 0:
         this->strenght = 0.5f;
-        this->arrow.setFillColor(sf::Color(255, 255, 255));
+        this->arrow.setFillColor(sf::Color(255, 255, 255, 128));
         break;
     case 1:
         this->strenght = 1.f;
-        this->arrow.setFillColor(sf::Color(128, 128, 254));
+        this->arrow.setFillColor(sf::Color(255, 255, 255, 255));
         break; 
     }
 }

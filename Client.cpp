@@ -303,11 +303,11 @@ void Client::menuWaitingRoom() {
 
 void Client::menuServerList() {
     MenuServerList menu(
-        window, 
-        socket_udp, 
-        connected, 
-        serverAddress, 
-        serverStatus
+        this->window, 
+        this->socket_udp, 
+        this->connected, 
+        this->serverAddress, 
+        this->serverStatus
     );
     menu.run();
     return;
