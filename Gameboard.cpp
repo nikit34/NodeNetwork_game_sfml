@@ -81,7 +81,54 @@ void Gameboard::initPlayers() {
 }
 
 void Gameboard::draw(sf::RenderTarget& target, sf::RenderStates states) const {
+    sf::Vector2f ratio(this->dot(
+        target.getDefaultView().getSize(),
+        sf::Vector2f(1.f / 800.f, 1.f / 600.f)
+    ));
+    states.transform.scale(ratio);
+    for (std::deque<Link>::const_iterator it = this->links.begin(); it != this->links.end(); ++it) {
+        sf::Vertex line[] = {
+            sf::Vertex(it->getOrgPos()),
+            sf::Vertex(it->getDestPos())
+        };
+        line[0].color = (*this->players)[it->org->getOwner() - 1].getColor();
+        target.draw(line, 2, sf::Lines, states);
+        target.draw(*it, states);
+    }
 
+    for (uint64_t i = 0; i < this->cells.size(); ++i) {
+        sf::CircleShape cell(this->cells[i].radius, 8);
+        cell.setOrigin(this->cells[i].radius, cells[i].radius);
+        cell.setPosition(this->cells[i].pos);
+        cell.setOutlineColor(sf::Color(255, 255, 255));
+        cell.setOutlineThickness(2);
+        if (this->cells[i].idOwner == 0) {
+            cell.setFillColor(Player::DEFAULT_COLOR[0]);
+        }
+        else {
+            cell.setFillColor((*this->players)[this->cells[i].idOwner - 1].getColor());
+        }
+        cell.setRotation(
+            this->elapsed.getElapsedTime().asSeconds() * 6.28f * 
+            RAD_TO_DEG * this->frequenceRotation[i]
+        );
+
+        target.draw(cell, states);
+
+        sf::Text text;
+        text.setFillColor(sf::Color::Black);
+
+        sf::Font font;
+        font.loadFromFile("Textures/JetBreins.ttf");
+        text.setFont(font);
+        text.setCharacterSize(4 + cells[i].radius / 8);
+        text.setString("" + ttos(cells[i].units) + " / " + ttos(cells[i].capacity));
+        text.setOrigin(text.getLocalBounds().left + text.getGlobalBounds().width / 2.f,
+            text.getGlobalBounds().height / 2.f);
+        text.setPosition(cells[i].pos);
+
+        target.draw(text, states);
+    }
 }
 
 void Gameboard::link(int idOrg, int idDest, float strength) {

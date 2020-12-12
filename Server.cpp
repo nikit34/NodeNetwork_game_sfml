@@ -30,7 +30,7 @@ void Server::launch() {
 		return;
 	
 	if (this->connected) {
-		this->serverStatus = SERVER_START_GAME;
+		this->serverStatus = this->SERVER_START_GAME;
 		
 		sf::Packet packet;
 
@@ -258,8 +258,8 @@ void Server::menuWaitingRoom() {
 }
 
 void Server::waitClient() {
-	this->serverStatus = SERVER_READY;
-	if (this->listener.listen(PORT_GAME_A) != sf::Socket::Done)
+	this->serverStatus = this->SERVER_READY;
+	if (this->listener.listen(this->PORT_GAME_A) != sf::Socket::Done)
 		return;
 
 	this->selector.add(this->listener);

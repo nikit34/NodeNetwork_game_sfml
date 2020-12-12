@@ -11,6 +11,8 @@
 
 
 
+#define RAD_TO_DEG 57.2957795f
+
 // Drawable - for paint
 class Gameboard : public sf::Drawable {
 public:
@@ -29,6 +31,7 @@ public:
 	int getCloserCell(sf::Vector2f coord);
 	int getOwner(int idCell);
 	void free(int idPlayer, int idCell);
+	inline sf::Vector2f dot(sf::Vector2f a, sf::Vector2f b) const;
 
 	friend sf::Packet& operator>>(sf::Packet& packet, Gameboard& gameboard);
 	friend sf::Packet& operator<<(sf::Packet& packet, const Gameboard& gameboard);
@@ -55,3 +58,19 @@ private:
 
 sf::Packet& operator>>(sf::Packet& packet, Gameboard& gboard);
 sf::Packet& operator<<(sf::Packet& packet, const Gameboard& gboard);
+
+
+inline sf::Vector2f Gameboard::dot(sf::Vector2f a, sf::Vector2f b) const {
+	return sf::Vector2f(a.x * b.x, a.y * b.y);
+}
+
+template<typename T>
+std::string ttos(T t) {
+	std::stringstream ss;
+	std::string s;
+	if (ss << t) {
+		ss >> s;
+		return s;
+	}
+	return "";
+}
