@@ -84,7 +84,7 @@ void Gameboard::initPlayers() {
 void Gameboard::draw(sf::RenderTarget& target, sf::RenderStates states) const {
     sf::Vector2f ratio(this->dot(
         target.getDefaultView().getSize(),
-        sf::Vector2f(1.f / 800.f, 1.f / 600.f)
+        sf::Vector2f(1.f / this->WIDTH, 1.f / this->HEIGHT)
     ));
     states.transform.scale(ratio);
     for (std::deque<Link>::const_iterator it = this->links.begin(); it != this->links.end(); ++it) {
@@ -98,11 +98,11 @@ void Gameboard::draw(sf::RenderTarget& target, sf::RenderStates states) const {
     }
 
     for (uint64_t i = 0; i < this->cells.size(); ++i) {
-        sf::CircleShape cell(this->cells[i].radius, 8);
+        sf::CircleShape cell(this->cells[i].radius, 20);
         cell.setOrigin(this->cells[i].radius, cells[i].radius);
         cell.setPosition(this->cells[i].pos);
         cell.setOutlineColor(sf::Color(255, 255, 255));
-        cell.setOutlineThickness(2);
+        cell.setOutlineThickness(4);
         if (this->cells[i].idOwner == 0) {
             cell.setFillColor(Player::DEFAULT_COLOR[0]);
         }
