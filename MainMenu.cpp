@@ -12,8 +12,6 @@ MainMenu::MainMenu(sf::RenderWindow& window) : Menu(window), fullscreen(false) {
     );
 
     this->window.setFramerateLimit(60); // fps
-    if (this->icon.loadFromFile("Textures/icon.ico"))
-        window.setIcon(256, 256, this->icon.getPixelsPtr());
 
     this->title = sf::Text("NodeNetwork", *FontManager::getFont("Textures/JetBreins.ttf"), 46);
     this->title.setFillColor(sf::Color(255, 0, 0));

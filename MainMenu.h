@@ -23,7 +23,6 @@ protected:
 	bool fullscreen;
 	sf::Text title;
 	sf::Text maintext;
-	sf::Image icon;
 
 private:
 	sf::ContextSettings settings;
