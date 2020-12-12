@@ -3,7 +3,7 @@
 
 
 const float Link::TIME_SCALE = 100.f;
-const float Link::ARROW_SIZE = 15.f;
+const float Link::ARROW_SIZE = 10.f;
 
 Link::Link(Cell* origin, Cell* destination, float strenght) :
     org(origin), dest(destination), strenght(strenght), 

@@ -102,7 +102,7 @@ void Gameboard::draw(sf::RenderTarget& target, sf::RenderStates states) const {
         cell.setOrigin(this->cells[i].radius, cells[i].radius);
         cell.setPosition(this->cells[i].pos);
         cell.setOutlineColor(sf::Color(255, 255, 255));
-        cell.setOutlineThickness(4);
+        cell.setOutlineThickness(2);
         if (this->cells[i].idOwner == 0) {
             cell.setFillColor(Player::DEFAULT_COLOR[0]);
         }
@@ -120,11 +120,13 @@ void Gameboard::draw(sf::RenderTarget& target, sf::RenderStates states) const {
         text.setFillColor(sf::Color::Black);
 
         text.setFont(*FontManager::getFont("Textures/JetBreins.ttf"));
-        text.setCharacterSize(4 + cells[i].radius / 8);
-        text.setString("" + ttos(cells[i].units) + " / " + ttos(cells[i].capacity));
-        text.setOrigin(text.getLocalBounds().left + text.getGlobalBounds().width / 2.f,
-            text.getGlobalBounds().height / 2.f);
-        text.setPosition(cells[i].pos);
+        text.setCharacterSize(4 + this->cells[i].radius / 8);
+        text.setString("" + ttos(this->cells[i].units) + " / " + ttos(this->cells[i].capacity));
+        text.setOrigin(
+            text.getLocalBounds().left + text.getGlobalBounds().width / 2.f,
+            text.getGlobalBounds().height / 2.f
+        );
+        text.setPosition(this->cells[i].pos);
 
         target.draw(text, states);
     }

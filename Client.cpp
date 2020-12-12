@@ -51,11 +51,9 @@ void Client::launch() {
         sf::Packet packet;
         this->socket.receive(packet);
         if (packet >> this->gboard) {
-            std::cout << "Carte recue" << std::endl;
+            std::cout << "Card received" << std::endl;
             this->run();
         }
-        else
-            std::cout << "erreur de reception du jeu ..." << std::endl;
     }
 }
 
@@ -273,7 +271,7 @@ void Client::menuWaitingRoom() {
     info3.setString("Player color :");
 
     sf::RectangleShape colorRect(sf::Vector2f(50.f, 20.f));
-    colorRect.setPosition(300.f + info3.getGlobalBounds().width, 200.f);
+    colorRect.setPosition(330.f + info3.getGlobalBounds().width, 200.f);
     colorRect.setFillColor(Player::DEFAULT_COLOR[this->idPlayer]);
 
     info.setString("waiting ...");
@@ -289,7 +287,7 @@ void Client::menuWaitingRoom() {
                     this->exitCurrentGame = true;
         }
 
-        info2.setString("Connectes: " + std::to_string((int)this->playerConnected) + " /" + std::to_string((int)this->playerMax));
+        info2.setString("Connectes: " + std::to_string((int)this->playerConnected) + " / " + std::to_string((int)this->playerMax));
 
         this->window.clear();
         this->window.draw(info);

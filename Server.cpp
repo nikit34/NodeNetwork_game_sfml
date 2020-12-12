@@ -213,7 +213,7 @@ void Server::menuWaitingRoom() {
 							sf::Mouse::getPosition(this->window)
 						))) {
 						 if (this->playerMax >= 2) {
-							this->playerMax--;
+							--this->playerMax;
 							this->players.pop_back();
 							this->gboard.initPlayers();
 						 }
