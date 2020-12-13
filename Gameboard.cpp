@@ -22,7 +22,7 @@ void Gameboard::reset() {
     this->cells.clear();
 }
 
-const uint16_t Gameboard::NUMBER = 25;
+const uint16_t Gameboard::NUMBER = 40;
 const float Gameboard::MIN_DIST = 20.f;
 const float Gameboard::BORDER = 5.f;
 const uint16_t Gameboard::MIN_CAPACITY = 25;
@@ -38,7 +38,7 @@ void Gameboard::randomize() {
     for (uint32_t i = 0; i < this->NUMBER; ++i) {
         ok = true;
         // (float)rand() / (float)RAND_MAX  ----- between 0 and 1
-        radius = (float)rand() / (float)RAND_MAX * 90.f + 20.f;
+        radius = (float)rand() / (float)RAND_MAX * 20.f + 20.f;
         x = (float)rand() / (float)RAND_MAX * (this->WIDTH - 2.f * (radius + this->BORDER)) + radius + this->BORDER;
         y = (float)rand() / (float)RAND_MAX * (this->HEIGHT - 2.f * (radius + this->BORDER)) + radius + this->BORDER;
         capacity = rand() % (this->MAX_CAPACITY - this->MIN_CAPACITY - (int)(radius / 2.5f)) + this->MIN_CAPACITY;
@@ -55,7 +55,7 @@ void Gameboard::randomize() {
         }
         if (ok) {
             this->cells.push_back(Cell(radius, x, y, capacity));
-            freqRot = ((float)rand() / RAND_MAX - 0.5f) / 6.f;
+            freqRot = ((float)rand() / RAND_MAX - 0.5f);
             this->frequenceRotation.push_back((freqRot != 0.f ? freqRot : 0.01f));
         }
         if (security > this->NUMBER * 10.f) {
@@ -82,6 +82,12 @@ void Gameboard::initPlayers() {
 }
 
 void Gameboard::draw(sf::RenderTarget& target, sf::RenderStates states) const {
+    sf::Texture texture;
+    texture.loadFromFile("Textures/bg.png");
+    sf::Sprite sprite;
+    sprite.setTexture(texture);
+    target.draw(sprite);
+
     sf::Vector2f ratio(this->dot(
         target.getDefaultView().getSize(),
         sf::Vector2f(1.f / this->WIDTH, 1.f / this->HEIGHT)
@@ -120,8 +126,8 @@ void Gameboard::draw(sf::RenderTarget& target, sf::RenderStates states) const {
         text.setFillColor(sf::Color::Black);
 
         text.setFont(*FontManager::getFont("Textures/JetBreins.ttf"));
-        text.setCharacterSize(4 + this->cells[i].radius / 8);
-        text.setString("" + ttos(this->cells[i].units) + " / " + ttos(this->cells[i].capacity));
+        text.setCharacterSize(6 + this->cells[i].radius / 8);
+        text.setString("" + ttos(this->cells[i].units) + "/\n/" + ttos(this->cells[i].capacity));
         text.setOrigin(
             text.getLocalBounds().left + text.getGlobalBounds().width / 2.f,
             text.getGlobalBounds().height / 2.f

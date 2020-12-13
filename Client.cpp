@@ -271,7 +271,7 @@ void Client::menuWaitingRoom() {
     info3.setString("Player color :");
 
     sf::RectangleShape colorRect(sf::Vector2f(50.f, 20.f));
-    colorRect.setPosition(330.f + info3.getGlobalBounds().width, 200.f);
+    colorRect.setPosition(330.f + info3.getGlobalBounds().width, 205.f);
     colorRect.setFillColor(Player::DEFAULT_COLOR[this->idPlayer]);
 
     info.setString("waiting ...");

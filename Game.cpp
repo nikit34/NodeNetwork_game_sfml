@@ -24,7 +24,6 @@ void Game::run() {
         }
 
         this->gboard.update(this->dt);
-
         this->window.clear();
         this->window.draw(this->gboard);
         this->window.display();
